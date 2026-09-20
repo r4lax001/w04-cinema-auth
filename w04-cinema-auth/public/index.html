@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cinema Auth | JWT</title><link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body><main>
+  <p class="eyebrow">CSI400 · WEEK 04</p>
+  <header><div><h1>Cinema Auth</h1><p>ระบบสมาชิกและการจองตั๋วหนัง · Express + SQLite</p></div>
+  <a id="oauth-link" class="button secondary" href="http://localhost:3001">เปิดสาธิต OAuth</a></header>
+  <div class="grid">
+    <section class="card"><h2>1. สมัครสมาชิก / เข้าสู่ระบบ</h2>
+      <p>บัญชีตัวอย่าง <code>member / MemberPass123!</code></p>
+      <form id="auth-form">
+        <label>Username<input name="username" required minlength="3" maxlength="30" autocomplete="username"></label>
+        <label>Password<input name="password" type="password" required minlength="8" autocomplete="current-password"></label>
+        <div class="actions"><button name="action" value="login">เข้าสู่ระบบ</button><button name="action" value="register" class="secondary">สมัครสมาชิก</button></div>
+      </form>
+      <p id="identity" aria-live="polite">ยังไม่ได้เข้าสู่ระบบ</p>
+      <label>JWT Token สำหรับนำไปใช้ใน Postman<textarea id="token" rows="4" readonly></textarea></label>
+      <div class="actions"><button id="copy-token" type="button" class="secondary">คัดลอก JWT</button><button id="logout" type="button" class="secondary">ออกจากหน้านี้</button></div>
+    </section>
+    <section class="card"><h2>2. ข้อมูลสาธารณะ</h2><p>เรียกได้โดยไม่มี Token</p>
+      <div class="actions"><button type="button" data-path="/api/public/movies">รายการหนัง</button><button type="button" data-path="/api/public/genres">ประเภทหนัง</button><button type="button" data-path="/api/public/showtimes">รอบฉาย</button></div>
+      <h2>3. ข้อมูลของสมาชิก</h2><p>ใช้ JWT ของบัญชีที่เข้าสู่ระบบด้านซ้าย</p>
+      <div class="actions"><button type="button" data-path="/api/protect/profile" data-auth="true">โปรไฟล์</button><button type="button" data-path="/api/protect/bookings" data-auth="true">การจองของฉัน</button></div>
+      <form id="booking-form"><div class="fields">
+        <label>รหัสรอบฉาย (ดูจากรอบฉาย)<input name="showtime_id" type="number" min="1" value="1" required></label>
+        <label>จำนวนตั๋ว<input name="quantity" type="number" min="1" max="6" value="1" required></label>
+      </div><button>จองตั๋ว</button></form>
+    </section>
+  </div>
+  <section class="card"><h2>ผลลัพธ์จาก API</h2><p id="result-status" role="status">เลือกคำสั่งด้านบนเพื่อแสดงผล</p><pre id="result">{}</pre></section>
+</main></body></html>

@@ -1,0 +1,21 @@
+{
+  "name": "w04-cinema-auth",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CSI400 Week 4: JWT and OAuth 2.0 cinema API coursework",
+  "type": "module",
+  "engines": { "node": ">=24.0.0" },
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "start": "node scripts/setup.mjs && node src/server.mjs",
+    "check": "node scripts/check-syntax.mjs"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2"
+  }
+}

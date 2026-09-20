@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cinema Apps | OAuth demo</title><link rel="stylesheet" href="/style.css"><script type="module" src="/client.js"></script>
+</head><body><main>
+  <p class="eyebrow">CSI400 · OAUTH CLIENT DEMO</p>
+  <header><div><h1>เชื่อมต่อกับ Cinema Auth</h1><p>แอปขอสิทธิ์จากผู้ใช้ผ่าน OAuth Authorization Code + PKCE</p></div><a id="home-link" class="button secondary" href="http://localhost:3000">กลับระบบสมาชิก</a></header>
+  <div class="grid">
+    <section class="card"><h2>1. เลือกแอปที่ขอสิทธิ์</h2>
+      <label>แอปพลิเคชัน<select id="client"><option value="cinema-partner">Cinema Partner · แอปภายนอก</option><option value="cinema-office">Cinema Office · ระบบภายใน</option></select></label>
+      <p id="client-info"></p><p>สิทธิ์ที่จะขอ: <code id="scopes"></code></p>
+      <button id="connect" type="button">ไปหน้าอนุญาตของ Cinema Auth</button>
+      <p class="muted">Partner ใช้บัญชี member ได้ ส่วน Office ต้องใช้ admin / AdminPass123!</p>
+      <p class="muted">กรอกรหัสผ่านที่หน้า Cinema Auth หลังจากกดเชื่อมต่อ</p>
+    </section>
+    <section class="card"><h2>2. OAuth Access Token</h2>
+      <p id="token-status" aria-live="polite">ยังไม่ได้รับสิทธิ์</p>
+      <label>Access Token สำหรับ Postman<textarea id="access-token" rows="4" readonly></textarea></label>
+      <div class="actions"><button id="copy" type="button" class="secondary">คัดลอก Access Token</button><button id="revoke" type="button" class="secondary">ยกเลิกสิทธิ์ของ Token นี้</button></div>
+      <p class="muted">Token นี้เป็นข้อความสุ่ม (opaque token) อายุ 15 นาที ค่า JWT ในหน้าแรกเป็น Token อีกประเภทหนึ่ง</p>
+    </section>
+  </div>
+  <section class="card"><h2>3. เรียก API ด้วยสิทธิ์ที่ได้รับ</h2><p>แอปภายนอกเข้าถึงข้อมูลของเจ้าของบัญชี ส่วนระบบภายในเข้าถึงข้อมูลสำหรับ admin</p>
+    <div class="actions"><button data-path="/api/protect/profile" type="button">Partner: โปรไฟล์</button><button data-path="/api/protect/bookings" type="button">Partner: การจองของฉัน</button></div>
+    <div class="actions"><button data-path="/api/private/users" type="button">Office: ผู้ใช้ทั้งหมด</button><button data-path="/api/private/bookings" type="button">Office: การจองทั้งหมด</button><button data-path="/api/private/summary" type="button">Office: สรุปยอด</button></div>
+    <p id="result-status" role="status">ยังไม่มีคำขอ</p><pre id="result">{}</pre>
+  </section>
+</main></body></html>

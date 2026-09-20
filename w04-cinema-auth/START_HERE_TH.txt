@@ -1,0 +1,45 @@
+W04 - Cinema Auth: วิธีเริ่มแบบสั้น
+================================
+
+สิ่งที่ทำให้
+1. สมัครสมาชิกและล็อกอิน รับ JWT และเก็บรหัสผ่านแบบ hash ด้วย bcrypt
+2. ฐานข้อมูล SQLite สร้างตารางและข้อมูลตัวอย่างให้เมื่อรันครั้งแรก
+3. API 9 ตัว: Public 3 / Protect 3 / Private 3 (ไม่รวม Login/Register/OAuth)
+4. OAuth มีหน้าอนุญาต แลก authorization code เป็น access token และยกเลิก token ได้
+5. หน้าสาธิต JWT, แอปสาธิต OAuth และไฟล์ Postman สำหรับนำไปทดสอบเอง
+
+วิธีรันบน Windows
+1. ติดตั้ง Node.js เวอร์ชัน 24.x จาก https://nodejs.org แล้วเปิด Terminal ใหม่
+2. แตก ZIP และเปิดโฟลเดอร์ w04-cinema-auth ใน VS Code
+3. เปิด Terminal ในโฟลเดอร์ที่มี package.json แล้วรัน
+
+   npm install
+   npm start
+
+4. เปิด http://localhost:3000 สำหรับสมัครสมาชิก/ล็อกอิน/จองตั๋ว
+5. เปิด http://localhost:3001 สำหรับสาธิต OAuth
+6. หยุดโปรแกรมด้วย Ctrl+C
+
+บัญชีตัวอย่าง
+สมาชิก: member / MemberPass123!
+ผู้ดูแล: admin / AdminPass123!
+
+OAuth ทำอย่างไร
+- เลือก Cinema Partner แล้วกดเชื่อมต่อ -> ใช้บัญชี member -> อนุญาต
+- เลือก Cinema Office แล้วกดเชื่อมต่อ -> ใช้บัญชี admin -> อนุญาต
+- คัดลอก Access Token ไปใช้ใน Postman ตามประเภทแอป
+- Public ไม่ต้องมี Token; Protect ใช้ JWT หรือ OAuth Partner; Private ใช้ OAuth Office ของ admin
+
+Postman
+Import ไฟล์ postman/W04-Cinema.postman_collection.json
+ตั้ง Collection Variables: jwt_token, partner_access_token, office_access_token
+รายละเอียดอยู่ใน README.md และ API_REFERENCE.md
+
+ขอบเขต
+- เป็นฐานข้อมูลตัวอย่างใหม่ ยังไม่ได้เชื่อมกับฐานข้อมูลจากงานสัปดาห์ก่อนของคุณ
+- ส่งมอบ source code โดยตรวจไวยากรณ์เท่านั้น ยังไม่ได้ทดสอบ API/OAuth หรือเก็บภาพผลทดสอบ
+- คุณต้องทดสอบ เก็บหลักฐาน และนำเสนออาจารย์เองตามโจทย์
+- เป็นเดโมสำหรับ localhost; ไม่ใช่ระบบที่ผ่านการตรวจเพื่อใช้งานจริงบนอินเทอร์เน็ต
+
+ถ้า PowerShell แจ้งว่า npm.ps1 cannot be loaded:
+ใช้ npm.cmd install และ npm.cmd start แทน โดยไม่ต้องเปลี่ยน Execution Policy
