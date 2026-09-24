@@ -18,6 +18,7 @@ for (const server of [app, clientApp]) {
   server.disable('x-powered-by');
   server.use(helmet({
     strictTransportSecurity: false,
+    referrerPolicy: { policy: 'same-origin' },
     contentSecurityPolicy: {
       directives: {
         'connect-src': ["'self'", API_ORIGIN],
